@@ -1,3 +1,4 @@
+```mermaid
 graph TD
     %% WARNA DAN STYLING %%
     classDef mhs fill:#e6f0fa,stroke:#003366,stroke-width:2px;
@@ -57,3 +58,4 @@ graph TD
         A8 --> Sys2[Sistem Terbitkan Sertifikat Co-op] ::: sys
         Sys2 --> End([Mahasiswa Cetak Sertifikat & Lulus!]) ::: mhs
     end
+```    
