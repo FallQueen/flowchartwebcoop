@@ -6,56 +6,56 @@ graph TD
     classDef sys fill:#f8fafc,stroke:#94a3b8,stroke-dasharray: 5 5;
 
     %% START MAHASISWA %%
-    Start([Mahasiswa Daftar Akun]) ::: mhs --> A1
+    Start([Mahasiswa Daftar Akun]):::mhs --> A1
 
     %% ADMIN APPROVAL %%
-    subgraph FASE 1: REGISTRASI & PERSIAPAN
-        A1{Admin: Cek Bukti Konsul & SPTJM} ::: admin
-        A1 -->|Ditolak| A2[Hapus Akun] ::: admin
-        A1 -->|Disetujui| M1[Mahasiswa Login] ::: mhs
-        M1 --> M2[Mahasiswa Wajib Upload CV] ::: mhs
+    subgraph FASE1 [FASE 1: REGISTRASI DAN PERSIAPAN]
+        A1{Admin: Cek Bukti Konsul & SPTJM}:::admin
+        A1 -->|Ditolak| A2[Hapus Akun]:::admin
+        A1 -->|Disetujui| M1[Mahasiswa Login]:::mhs
+        M1 --> M2[Mahasiswa Wajib Upload CV]:::mhs
     end
 
     %% PENCARIAN MAGANG %%
-    subgraph FASE 2: PENCARIAN & MATCHING MAGANG
-        M2 --> M_Jalur{Metode Pencarian?} ::: mhs
-        M_Jalur -->|Bursa Portal| M3[Apply Lowongan Portal] ::: mhs
-        M_Jalur -->|Cari Sendiri| M4[Input Lapor Magang Mandiri + LoA] ::: mhs
-        M_Jalur -->|Belum Dapat| M5[Isi Laporan Progress Mingguan] ::: mhs
+    subgraph FASE2 [FASE 2: PENCARIAN DAN MATCHING MAGANG]
+        M2 --> M_Jalur{Metode Pencarian?}:::mhs
+        M_Jalur -->|Bursa Portal| M3[Apply Lowongan Portal]:::mhs
+        M_Jalur -->|Cari Sendiri| M4[Input Lapor Magang Mandiri + LoA]:::mhs
+        M_Jalur -->|Belum Dapat| M5[Isi Laporan Progress Mingguan]:::mhs
 
-        M3 --> A3{Admin/HRD Review CV} ::: admin
+        M3 --> A3{Admin/HRD Review CV}:::admin
         A3 -->|Ditolak| M_Jalur
-        A3 -->|Diterima| Sys1[Sistem Otomatis Buat Data Magang] ::: sys
+        A3 -->|Diterima| Sys1[Sistem Otomatis Buat Data Magang]:::sys
         
-        M5 --> A4[Admin Pantau & Kirim Email Teguran] ::: admin
+        M5 --> A4[Admin Pantau & Kirim Email Teguran]:::admin
         A4 -.-> M_Jalur
         
-        M4 --> A5{Admin: Cek & Verifikasi LoA} ::: admin
+        M4 --> A5{Admin: Cek & Verifikasi LoA}:::admin
         A5 -->|Tidak Valid| M_Jalur
     end
 
     %% PELAKSANAAN & EVALUASI %%
-    subgraph FASE 3: MAGANG BERJALAN & EVALUASI
+    subgraph FASE3 [FASE 3: MAGANG BERJALAN DAN EVALUASI]
         Sys1 --> MagangAktif((Status: Magang Berjalan))
         A5 -->|Verifikasi Valid| MagangAktif
         
-        MagangAktif --> M6[Mahasiswa Kumpul Laporan Bulanan] ::: mhs
+        MagangAktif --> M6[Mahasiswa Kumpul Laporan Bulanan]:::mhs
         
-        MagangAktif --> A6[Admin Kirim Link Form Evaluasi UTS ke Supervisor] ::: admin
-        MagangAktif --> A7[Admin Kirim Link Form Evaluasi UAS ke Supervisor] ::: admin
+        MagangAktif --> A6[Admin Kirim Link Form Evaluasi UTS]:::admin
+        MagangAktif --> A7[Admin Kirim Link Form Evaluasi UAS]:::admin
         
-        A6 --> M7[Mahasiswa Upload/Revisi Laporan UTS] ::: mhs
-        A7 --> M8[Mahasiswa Upload/Revisi Laporan UAS] ::: mhs
+        A6 --> M7[Mahasiswa Upload/Revisi Laporan UTS]:::mhs
+        A7 --> M8[Mahasiswa Upload/Revisi Laporan UAS]:::mhs
     end
 
     %% KELULUSAN %%
-    subgraph FASE 4: KELULUSAN
-        M7 --> CekSyarat{Syarat Lengkap?} ::: sys
+    subgraph FASE4 [FASE 4: KELULUSAN]
+        M7 --> CekSyarat{Syarat Lengkap?}:::sys
         M8 --> CekSyarat
         M6 --> CekSyarat
         
-        CekSyarat -->|Lengkap & Nilai Masuk| A8[Admin Input Grade Akhir] ::: admin
-        A8 --> Sys2[Sistem Terbitkan Sertifikat Co-op] ::: sys
-        Sys2 --> End([Mahasiswa Cetak Sertifikat & Lulus!]) ::: mhs
+        CekSyarat -->|Lengkap & Nilai Masuk| A8[Admin Input Grade Akhir]:::admin
+        A8 --> Sys2[Sistem Terbitkan Sertifikat Co-op]:::sys
+        Sys2 --> End([Mahasiswa Cetak Sertifikat & Lulus!]):::mhs
     end
-```    
+```
